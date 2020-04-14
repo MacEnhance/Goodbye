@@ -17,16 +17,13 @@
 @end
 
 @implementation ME_Goodbye_NSApplicationDelegate
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
-    NSUserDefaults *blacklistArray = [[NSUserDefaults alloc] initWithSuiteName:[[NSBundle bundleForClass:[Goodbye class]] bundleIdentifier]];
-    if ([[blacklistArray valueForKey:[[NSBundle mainBundle] bundleIdentifier]] boolValue])
-        return ZKOrig(BOOL, sender);
-    else
-        return true;
-}
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender { return true; }
 @end
 
 @implementation Goodbye
-+ (void)load { _ZKSwizzle(ME_Goodbye_NSApplicationDelegate.class, NSApp.delegate.class); }
++ (void)load {
+    if (![NSUserDefaults.standardUserDefaults boolForKey:@"GoodbyeBlacklist"])
+        _ZKSwizzle(ME_Goodbye_NSApplicationDelegate.class, NSApp.delegate.class);
+}
 @end
 

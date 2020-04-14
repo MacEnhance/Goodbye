@@ -14,17 +14,19 @@
 @end
 
 @implementation ME_Goodbye_t
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender { return true; }
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
+    NSUserDefaults *blacklistArray = [[NSUserDefaults alloc] initWithSuiteName:[[NSBundle bundleForClass:[self class]] bundleIdentifier]];
+    if (![[blacklistArray valueForKey:[[NSBundle mainBundle] bundleIdentifier]] boolValue])
+        return true;
+    else
+        return ZKOrig(BOOL, sender);
+}
 @end
 
 @interface Goodbye : NSObject
 @end
 
 @implementation Goodbye
-+ (void)load {
-    NSUserDefaults *blacklistArray = [[NSUserDefaults alloc] initWithSuiteName:[[NSBundle bundleForClass:[self class]] bundleIdentifier]];
-    if (![[blacklistArray valueForKey:[[NSBundle mainBundle] bundleIdentifier]] boolValue])
-        _ZKSwizzle(ME_Goodbye_t.class, NSApp.delegate.class);
-}
++ (void)load { _ZKSwizzle(ME_Goodbye_t.class, NSApp.delegate.class); }
 @end
 

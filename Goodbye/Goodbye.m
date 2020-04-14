@@ -10,23 +10,23 @@
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 
-@interface ME_Goodbye_t : NSObject <NSApplicationDelegate>
-@end
-
-@implementation ME_Goodbye_t
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
-    NSUserDefaults *blacklistArray = [[NSUserDefaults alloc] initWithSuiteName:[[NSBundle bundleForClass:[self class]] bundleIdentifier]];
-    if (![[blacklistArray valueForKey:[[NSBundle mainBundle] bundleIdentifier]] boolValue])
-        return true;
-    else
-        return ZKOrig(BOOL, sender);
-}
-@end
-
 @interface Goodbye : NSObject
 @end
 
+@interface ME_Goodbye_NSApplicationDelegate : NSObject <NSApplicationDelegate>
+@end
+
+@implementation ME_Goodbye_NSApplicationDelegate
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
+    NSUserDefaults *blacklistArray = [[NSUserDefaults alloc] initWithSuiteName:[[NSBundle bundleForClass:[Goodbye class]] bundleIdentifier]];
+    if ([[blacklistArray valueForKey:[[NSBundle mainBundle] bundleIdentifier]] boolValue])
+        return ZKOrig(BOOL, sender);
+    else
+        return true;
+}
+@end
+
 @implementation Goodbye
-+ (void)load { _ZKSwizzle(ME_Goodbye_t.class, NSApp.delegate.class); }
++ (void)load { _ZKSwizzle(ME_Goodbye_NSApplicationDelegate.class, NSApp.delegate.class); }
 @end
 

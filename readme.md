@@ -16,7 +16,8 @@
 
 1. Find the bundle ID of the application you want to blacklist. EG: `com.googlecode.iterm2`
 2. Open `/System/Applications/Utilities/Terminal.app`
-3. Enter the command `defaults write com.macenhance.Goodbye com.googlecode.iterm2 -bool true`
+3. Enter the command `defaults write com.googlecode.iterm2 GoodbyeBlacklist -bool true`
+4. Restart the application
 
 - To remove an app, replace `true` with `false`
 

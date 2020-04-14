@@ -10,9 +10,15 @@
 
 - All applications will quit when the last window closes
 
-# Notes:
+# Blacklisting:
 
-- None
+- To add an app the blacklist
+
+1. Find the bundle ID of the application you want to blacklist. EG: `com.googlecode.iterm2`
+2. Open `/System/Applications/Utilities/Terminal.app`
+3. Enter the command `defaults write com.macenhance.Goodbye com.googlecode.iterm2 -bool true`
+
+- To remove an app, replace `true` with `false`
 
 # Installation:
 

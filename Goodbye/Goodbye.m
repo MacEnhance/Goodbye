@@ -21,6 +21,10 @@
 @end
 
 @implementation Goodbye
-+ (void)load { _ZKSwizzle(ME_Goodbye_t.class, NSApp.delegate.class); }
++ (void)load {
+    NSUserDefaults *blacklistArray = [[NSUserDefaults alloc] initWithSuiteName:[[NSBundle bundleForClass:[self class]] bundleIdentifier]];
+    if (![[blacklistArray valueForKey:[[NSBundle mainBundle] bundleIdentifier]] boolValue])
+        _ZKSwizzle(ME_Goodbye_t.class, NSApp.delegate.class);
+}
 @end
 

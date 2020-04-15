@@ -22,7 +22,8 @@
 
 @implementation Goodbye
 + (void)load {
-    if (![NSUserDefaults.standardUserDefaults boolForKey:@"GoodbyeBlacklist"] && ![NSBundle.mainBundle objectForInfoDictionaryKey:@"LSUIElement"])
+    NSArray *globalBlacklist = [NSArray arrayWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"globalBlacklist" ofType:@"plist"]];
+    if (![globalBlacklist containsObject:[NSBundle.mainBundle bundleIdentifier]] && ![NSUserDefaults.standardUserDefaults boolForKey:@"GoodbyeBlacklist"] && ![NSBundle.mainBundle objectForInfoDictionaryKey:@"LSUIElement"])
         _ZKSwizzle(ME_Goodbye_NSApplicationDelegate.class, NSApp.delegate.class);
 }
 @end

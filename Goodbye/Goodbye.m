@@ -22,7 +22,7 @@
 
 @implementation Goodbye
 + (void)load {
-    if (![NSUserDefaults.standardUserDefaults boolForKey:@"GoodbyeBlacklist"] && ![[NSBundle mainBundle] objectForInfoDictionaryKey:@"LSUIElement"])
+    if (![NSUserDefaults.standardUserDefaults boolForKey:@"GoodbyeBlacklist"] && ![NSBundle.mainBundle objectForInfoDictionaryKey:@"LSUIElement"])
         _ZKSwizzle(ME_Goodbye_NSApplicationDelegate.class, NSApp.delegate.class);
 }
 @end

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB20B01D2447504200E05E17 /* globalBlacklist.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB20B01C2447504200E05E17 /* globalBlacklist.plist */; };
+		ABD4BD8924719585006844B6 /* globalWhitelist.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABD4BD8824719585006844B6 /* globalWhitelist.plist */; };
 		F39B2FE824462DAB00BB8B00 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39B2FE724462DAB00BB8B00 /* AppKit.framework */; };
 		F39B2FEA24462DAB00BB8B00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39B2FE924462DAB00BB8B00 /* Foundation.framework */; };
 		F39B2FF124462DAB00BB8B00 /* Goodbye.m in Sources */ = {isa = PBXBuildFile; fileRef = F39B2FF024462DAB00BB8B00 /* Goodbye.m */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		AB20B01C2447504200E05E17 /* globalBlacklist.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = globalBlacklist.plist; sourceTree = "<group>"; };
+		ABD4BD8824719585006844B6 /* globalWhitelist.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = globalWhitelist.plist; sourceTree = "<group>"; };
 		F39B2FE424462DAB00BB8B00 /* Goodbye.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Goodbye.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39B2FE724462DAB00BB8B00 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		F39B2FE924462DAB00BB8B00 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -71,6 +73,7 @@
 				F39B2FF024462DAB00BB8B00 /* Goodbye.m */,
 				F39B2FFD244630BC00BB8B00 /* Info.plist */,
 				AB20B01C2447504200E05E17 /* globalBlacklist.plist */,
+				ABD4BD8824719585006844B6 /* globalWhitelist.plist */,
 			);
 			path = Goodbye;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB20B01D2447504200E05E17 /* globalBlacklist.plist in Resources */,
+				ABD4BD8924719585006844B6 /* globalWhitelist.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,11 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-			);
-			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
@@ -293,7 +293,10 @@
 		F39B2FFB24462DAB00BB8B00 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = (
+					"$(ARCHS_STANDARD_64_BIT)",
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -306,8 +309,11 @@
 				INSTALL_PATH = "/Library/Application Support/MacEnhance/Plugins";
 				MACH_O_TYPE = mh_dylib;
 				MARKETING_VERSION = 1.2.2;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.macenhance.Goodbye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.13;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -315,7 +321,10 @@
 		F39B2FFC24462DAB00BB8B00 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = (
+					"$(ARCHS_STANDARD_64_BIT)",
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -328,8 +337,11 @@
 				INSTALL_PATH = "/Library/Application Support/MacEnhance/Plugins";
 				MACH_O_TYPE = mh_dylib;
 				MARKETING_VERSION = 1.2.2;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.macenhance.Goodbye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.13;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;

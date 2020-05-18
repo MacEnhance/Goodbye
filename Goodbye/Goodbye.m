@@ -32,7 +32,7 @@
     }
 
     NSArray *windows = [NSApp windows];
-    [self performSelector:@selector(closeIfRightConditions:) withObject:windows afterDelay:0.3 ];
+    [self performSelector:@selector(closeIfRightConditions:) withObject:windows afterDelay:0.5 ];
     
     return false;
 
@@ -40,8 +40,6 @@
 
 - (void)closeIfRightConditions:(NSMutableArray*)prevWindows {
     NSArray *windows = [NSApp windows];
-    NSLog(@"%@", prevWindows);
-    NSLog(@"%@", windows);
     if ([windows isEqualToArray:prevWindows] || [prevWindows count] > [windows count]) {
         [NSApp terminate:self];
     }

@@ -11,7 +11,7 @@
     
     <!--Technical Issues-->
 	<string>org.mozilla.firefox</string>
-	<string>com.apple.ScreenSharing</string>
+<!--    <string>com.apple.ScreenSharing</string>-->
 	<string>com.rosalab.RosaImageWriter</string>
 	<string>com.apple.ActivityMonitor</string>
     

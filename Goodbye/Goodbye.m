@@ -13,34 +13,49 @@
 @interface Goodbye : NSObject
 @end
 
-@interface ME_Goodbye_Whitelisted_NSApplicationDelegate : NSObject <NSApplicationDelegate>
-@end
-
 @interface ME_Goodbye_NSApplicationDelegate : NSObject <NSApplicationDelegate>
 @end
 
 @implementation ME_Goodbye_NSApplicationDelegate
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
-    NSArray *windows = [NSApp NSWindowControllers];
-    NSMutableString *windowClasses = [NSMutableString stringWithString:@""];
-    for (NSWindow *aWindow in windows) {
-        [windowClasses appendString:(NSStringFromClass([aWindow class]))];
+    
+    
+    BOOL origReturn = false;
+    @try {
+        origReturn = ZKOrig(BOOL);
     }
-    [self performSelector:@selector(closeIfRightConditions:) withObject:windowClasses afterDelay:0.1 ];
+    @catch (NSException *e ) {
+    }
+    
+    if (origReturn == true) {
+        return true;
+    }
+
+    NSArray *windows = [NSApp windows];
+    NSMutableArray *windowClasses = [[NSMutableArray alloc]init];
+    for (NSWindow *aWindow in windows) {
+        if (true /*! [aWindow isKindOfClass:[NSPanel class]]*/) {
+            [windowClasses addObject:(NSStringFromClass([aWindow class]))];
+        }
+    }
+    [self performSelector:@selector(closeIfRightConditions:) withObject:windows afterDelay:0.3 ];
     
     return false;
-    
+
 }
 
-- (void)closeIfRightConditions:(NSMutableString*)prevWindowClasses {
-    NSArray *windows = [NSApp NSWindowControllers];
-    NSMutableString *windowClasses = [NSMutableString stringWithString:@""];
+- (void)closeIfRightConditions:(NSMutableArray*)prevWindowClasses {
+    NSArray *windows = [NSApp windows];
+    NSMutableArray *windowClasses = [[NSMutableArray alloc]init];
     for (NSWindow *aWindow in windows) {
-        [windowClasses appendString:(NSStringFromClass([aWindow class]))];
+        if (true /*! [aWindow isKindOfClass:[NSPanel class]]*/) {
+            [windowClasses addObject:(NSStringFromClass([aWindow class]))];
+        }
     }
-    NSLog(@"%@",windowClasses);
-    NSLog(@"%@",prevWindowClasses);
-    if ([windowClasses isEqualToString:prevWindowClasses] || [windows count] == 0) {
+    NSLog(@"%@", prevWindowClasses);
+    NSLog(@"%@", windowClasses);
+    NSLog(@"%@", windows);
+    if ([windows isEqualToArray:prevWindowClasses] || [prevWindowClasses count] > [windows count]) {
         [NSApp terminate:self];
     }
 }

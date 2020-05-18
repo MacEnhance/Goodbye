@@ -15,7 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AB20B01C2447504200E05E17 /* globalBlacklist.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = globalBlacklist.plist; sourceTree = "<group>"; };
+		AB20B01C2447504200E05E17 /* globalBlacklist.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = globalBlacklist.plist; sourceTree = "<group>"; usesTabs = 1; };
 		F39B2FE424462DAB00BB8B00 /* Goodbye.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Goodbye.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39B2FE724462DAB00BB8B00 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		F39B2FE924462DAB00BB8B00 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };

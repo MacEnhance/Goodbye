@@ -2,18 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-    
-    <!--UX Issues-->
-    <string>com.apple.mail</string>
+
+	<!--UX Issues-->
+	<string>com.apple.mail</string>
 	<string>com.apple.iCal</string>
 	<string>org.m0k.transmission</string>
 	<string>com.viscosityvpn.Viscosity</string>
-    
-    <!--Technical Issues-->
-    <string>com.apple.ScreenSharing</string>
-    <string>com.apple.ActivityMonitor</string>
+
+	<!--Technical Issues-->
+	<string>com.apple.ScreenSharing</string>
 	<string>org.mozilla.firefox</string>
 	<string>com.rosalab.RosaImageWriter</string>
-    
+
 </array>
 </plist>

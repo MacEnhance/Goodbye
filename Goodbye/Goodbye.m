@@ -20,27 +20,25 @@
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
     
-    BOOL origReturn = false;
+    //Was the application originally set to Terminate?
+    BOOL shouldTerminate = false;
     @try {
-        origReturn = ZKOrig(BOOL);
-    }
-    @catch (NSException *e ) {
-    }
-    
-    if (origReturn == true) {
+        shouldTerminate = ZKOrig(BOOL);
+    } @catch (NSException *e ) {}
+    if (shouldTerminate == true) {
         return true;
     }
-
-    NSArray *windows = [NSApp windows];
-    [self performSelector:@selector(closeIfRightConditions:) withObject:windows afterDelay:0.5 ];
-    
-    return false;
-
+    else {
+        [self performSelector:@selector(closeIfNotVisible:) withObject:sender afterDelay:0.5];
+        return false;
+    }
 }
 
-- (void)closeIfRightConditions:(NSMutableArray*)prevWindows {
-    NSArray *windows = [NSApp windows];
-    if ([windows isEqualToArray:prevWindows] || [prevWindows count] > [windows count]) {
+- (void)closeIfNotVisible:(NSApplication*)sender {
+    if ([sender occlusionState] & NSApplicationOcclusionStateVisible) {
+        return;
+    }
+    else {
         [NSApp terminate:self];
     }
 }

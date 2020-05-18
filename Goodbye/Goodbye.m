@@ -17,8 +17,8 @@
 @end
 
 @implementation ME_Goodbye_NSApplicationDelegate
+
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
-    
     
     BOOL origReturn = false;
     @try {
@@ -32,30 +32,17 @@
     }
 
     NSArray *windows = [NSApp windows];
-    NSMutableArray *windowClasses = [[NSMutableArray alloc]init];
-    for (NSWindow *aWindow in windows) {
-        if (true /*! [aWindow isKindOfClass:[NSPanel class]]*/) {
-            [windowClasses addObject:(NSStringFromClass([aWindow class]))];
-        }
-    }
     [self performSelector:@selector(closeIfRightConditions:) withObject:windows afterDelay:0.3 ];
     
     return false;
 
 }
 
-- (void)closeIfRightConditions:(NSMutableArray*)prevWindowClasses {
+- (void)closeIfRightConditions:(NSMutableArray*)prevWindows {
     NSArray *windows = [NSApp windows];
-    NSMutableArray *windowClasses = [[NSMutableArray alloc]init];
-    for (NSWindow *aWindow in windows) {
-        if (true /*! [aWindow isKindOfClass:[NSPanel class]]*/) {
-            [windowClasses addObject:(NSStringFromClass([aWindow class]))];
-        }
-    }
-    NSLog(@"%@", prevWindowClasses);
-    NSLog(@"%@", windowClasses);
+    NSLog(@"%@", prevWindows);
     NSLog(@"%@", windows);
-    if ([windows isEqualToArray:prevWindowClasses] || [prevWindowClasses count] > [windows count]) {
+    if ([windows isEqualToArray:prevWindows] || [prevWindows count] > [windows count]) {
         [NSApp terminate:self];
     }
 }

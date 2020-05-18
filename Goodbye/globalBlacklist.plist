@@ -10,10 +10,10 @@
 	<string>com.viscosityvpn.Viscosity</string>
     
     <!--Technical Issues-->
+    <string>com.apple.ScreenSharing</string>
+    <string>com.apple.ActivityMonitor</string>
 	<string>org.mozilla.firefox</string>
-<!--    <string>com.apple.ScreenSharing</string>-->
 	<string>com.rosalab.RosaImageWriter</string>
-	<string>com.apple.ActivityMonitor</string>
     
 </array>
 </plist>

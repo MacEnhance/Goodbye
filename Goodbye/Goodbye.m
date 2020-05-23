@@ -29,16 +29,24 @@
         return true;
     }
     else {
-        [self performSelector:@selector(closeIfNotVisible:) withObject:sender afterDelay:0.5];
+        [self performSelector:@selector(closeIfRightConditions:) withObject:sender afterDelay:0.5];
         return false;
     }
 }
 
-- (void)closeIfNotVisible:(NSApplication*)sender {
+- (void)closeIfRightConditions:(NSApplication*)sender {
     if ([sender occlusionState] & NSApplicationOcclusionStateVisible) {
         return;
     }
     else {
+        // Application is not visible. Check for minaturized windows.
+        NSArray *windows = [sender windows];
+        for (NSWindow *aWindow in windows) {
+            if ([aWindow isMiniaturized]) {
+                return;
+            }
+        }
+        // No miniaturized windows either. Safe to close app.
         [NSApp terminate:self];
     }
 }

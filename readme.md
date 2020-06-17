@@ -8,7 +8,7 @@
 - Goodbye is a MacForge Plugin to make all applications quit when the last window closes
 - Author: [MacEnhance](https://github.com/MacEnhance)
 
-# functionality:
+# Functionality:
 
 - All applications will quit when the last window closes
 

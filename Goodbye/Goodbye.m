@@ -23,21 +23,18 @@
     BOOL shouldTerminate = false;
     @try { shouldTerminate = ZKOrig(BOOL, sender); }
     @catch (NSException *e ) {}
-    if (!shouldTerminate) [self performSelector:@selector(closeIfRightConditions:) withObject:sender afterDelay:0.5];
+    [self performSelector:@selector(closeIfRightConditions:) withObject:sender afterDelay:0.5];
     return shouldTerminate;
 }
 
 - (void)closeIfRightConditions:(NSApplication*)sender {
-    if (sender.occlusionState & NSApplicationOcclusionStateVisible) {
-        return;
-    } else {
-        // Application is not visible. Check for minaturized windows.
-        for (NSWindow *win in sender.windows)
-            if (win.isMiniaturized)
-                return;
-        // No miniaturized windows either. Safe to close app.
-        [NSApp terminate:self];
+    Boolean killme = true;
+    if (sender.occlusionState == NSApplicationOcclusionStateVisible) killme = false;
+    for (NSWindow *win in sender.windows) {
+        if (win.isVisible) killme = false;
+        if (win.isMiniaturized) killme = false;
     }
+    if (killme) [sender terminate:nil];
 }
 
 @end
@@ -46,7 +43,7 @@
 
 + (void)load {
     NSArray *globalBlacklist = [NSArray arrayWithContentsOfFile:[[NSBundle bundleForClass:self.class] pathForResource:@"globalBlacklist" ofType:@"plist"]];
-    if (![globalBlacklist containsObject:[NSBundle.mainBundle bundleIdentifier]] && ![NSUserDefaults.standardUserDefaults boolForKey:@"GoodbyeBlacklist"] && ![NSBundle.mainBundle objectForInfoDictionaryKey:@"LSUIElement"])
+    if (![globalBlacklist containsObject:NSBundle.mainBundle.bundleIdentifier] && ![NSUserDefaults.standardUserDefaults boolForKey:@"GoodbyeBlacklist"] && ![NSBundle.mainBundle objectForInfoDictionaryKey:@"LSUIElement"])
         _ZKSwizzle(ME_Goodbye_NSApplicationDelegate.class, NSApp.delegate.class);
 }
 
